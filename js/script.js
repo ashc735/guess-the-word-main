@@ -3,9 +3,9 @@ const guessedLetters = document.querySelector(".guessed-letters");
 //* Select Button Here *//
 const guessLetterButton = document.querySelector(".guess");
 //* Select Text Input for player's guesses *//
-const letter = document.querySelector(".letter");
+const letterInput = document.querySelector(".letter");
 //* Select paragraph where word in progress appears *//
-const wordInProgress = document.querySelector(".word-in-progess");
+const wordInProgress = document.querySelector(".word-in-progress");
 //* Select paragraph where remaining guesses display *//
 const remaining = document.querySelector(".remaining");
 //* Select span inside paragraph where remaining guesses display *//
@@ -33,10 +33,10 @@ const placeholder = function (word) {
 //* Add Event Listener for Button click *//
 
 guessLetterButton.addEventListener("click", function (e) {
-    e.preventDefault();
-    const guess = letterInput.value;
-    console.log(guess);
-    letterInput.value = "";
+  e.preventDefault();
+  const guess = letterInput.value;
+  console.log(guess);
+  letterInput.value = "";
 });
 
 
