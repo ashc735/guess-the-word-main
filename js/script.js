@@ -1,5 +1,5 @@
 //* Select Unordered List Item Guessed Letters here *//
-const guessedLetters = document.querySelector(".guessed-letters");
+const guessedLettersElement = document.querySelector(".guessed-letters");
 //* Select Button Here *//
 const guessLetterButton = document.querySelector(".guess");
 //* Select Text Input for player's guesses *//
@@ -17,6 +17,7 @@ const playAgainButton = document.querySelector(".play-again");
 
 //* Global variable for starting word *//
 const word = "magnolia";
+const guessedLetters = [];
 
 //* Display symbols are placeholders for chosen word's letters. *//
 const placeholder = function (word) {
@@ -34,10 +35,46 @@ const placeholder = function (word) {
 
 guessLetterButton.addEventListener("click", function (e) {
   e.preventDefault();
+  //Empty message paragraph
+  message.innerText = "";
+  //What was entered in the input
   const guess = letterInput.value;
-  console.log(guess);
+  const goodGuess = validateInput(guess);
+
+  if (goodGuess) {
+    makeGuess(guess);
+  }
   letterInput.value = "";
 });
+
+//* Add function to validate player's input *//
+
+const validateInput = function (input) {
+  const acceptedLetter = /[a-zA-Z]/;
+  if (input.length === 0) {
+    //Is the input empty?
+    message.innerText = "Please enter a letter A-Z.";
+  } else if (input.length > 1) {
+    //Did you input more than one letter?
+    message.innerText= "Please enter only one letter at a time.";
+  } else if (!input.match(acceptedLetter)) {
+    //Did you type a number, special character, or something other than a letter A-Z?
+    message.innerText = "Please enter only a letter A to Z.";
+  } else {
+    //Finally only a single letter!
+    return input;
+  }
+};
+
+const makeGuess = function (guess) {
+  guess = guess.toUpperCase();
+  if (guessedLetters.includes(guess)) {
+    message.innerText = "You already guessed, that letter. Try again.";
+  } else {
+    guessedLetters.push(guess);
+    console.log(guessedLetters);
+  }
+};
 
 
 
