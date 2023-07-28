@@ -18,7 +18,7 @@ const playAgainButton = document.querySelector(".play-again");
 //* Global variable for starting word *//
 let word = "magnolia";
 
-const guessedLetters = [];
+let guessedLetters = [];
 
 let remainingGuesses = 8;
 
@@ -136,13 +136,13 @@ const updateGuessesRemaining = function (guess) {
 
   if (remainingGuesses === 0) {
     message.innerHTML = `Game over! The word was <span class="highlight">${word}</span>.`;
+    startOver();
   } else if (remainingGuesses === 1) {
     remainingSpan.innerText = `${remainingGuesses} guess`;
   } else {
     remainingSpan.innerText = `${remainingGuesses} guesses.`;
   }
 };
-
 const checkIfWin = function () {
   if (word.toUpperCase() === wordInProgress.innerText) {
     message.classList.add("win");
@@ -167,7 +167,7 @@ playAgainButton.addEventListener("click", function () {
   remainingSpan.innerText = `${remainingGuesses} guesses`;
   guessedLettersElement.innerHTML = "";
   message.innerText = "";
-  //Grab a new word
+  
   getWord();
 
   //show the right UI elements
